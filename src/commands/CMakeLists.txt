@@ -41,7 +41,6 @@ set (commands_SRCS Command.cpp        Command.h
                    CmdLog.cpp         CmdLog.h
                    CmdLogo.cpp        CmdLogo.h
                    CmdModify.cpp      CmdModify.h
-                   CmdNews.cpp        CmdNews.h
                    CmdPrepend.cpp     CmdPrepend.h
                    CmdProjects.cpp    CmdProjects.h
                    CmdPurge.cpp       CmdPurge.h

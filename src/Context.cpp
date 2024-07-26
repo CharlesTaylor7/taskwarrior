@@ -117,7 +117,6 @@ std::string configurationDefaults =
   "expressions=infix                              # Prefer infix over postfix expressions\n"
   "json.array=1                                   # Enclose JSON output in [ ]\n"
   "abbreviation.minimum=2                         # Shortest allowed abbreviation\n"
-  "news.version=                                  # Latest version highlights read by the user\n"
   "purge.on-sync=0                                # Purge old tasks on sync\n"
   "\n"
   "# Dates\n"
@@ -1220,7 +1219,6 @@ void Context::createDefaultConfig ()
              << now.toString ("m/d/Y H:N:S")
              << "]\n"
              << "data.location=" << data_dir._original << "\n"
-             << "news.version=" << Version::Current() << "\n"
              << "\n# To use the default location of the XDG directories,\n"
              << "# move this configuration file from ~/.taskrc to ~/.config/task/taskrc and update location config as follows:\n"
              << "\n#data.location=~/.local/share/task\n"

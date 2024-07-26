@@ -251,28 +251,6 @@ int CmdCustom::execute (std::string& output)
     rc = 1;
   }
 
-  // Inform user about the new release highlights if not presented yet
-  Version news_version(Context::getContext ().config.get ("news.version"));
-  Version current_version = Version::Current();
-  if (news_version != current_version)
-  {
-    std::random_device device;
-    std::mt19937 random_generator(device());
-    std::uniform_int_distribution<std::mt19937::result_type> twentyfive_percent(1, 4);
-
-    // 25% chance to display the message.
-    if (twentyfive_percent(random_generator) == 4)
-    {
-      std::ostringstream notice;
-      notice << "Recently upgraded to " << current_version << ". "
-        "Please run 'task news' to read highlights about the new release.";
-      if (Context::getContext ().verbose ("footnote"))
-        Context::getContext ().footnote (notice.str());
-      else if (Context::getContext ().verbose ("header"))
-        Context::getContext ().header (notice.str());
-    }
-  }
-
   std::string location  = (Context::getContext ().data_dir);
   File pending_data = File (location + "/pending.data");
   if (pending_data.exists()) {

@@ -149,7 +149,6 @@ syn match taskrcGoodKey '^\s*\Vlist.all.tags='he=e-1
 syn match taskrcGoodKey '^\s*\Vlocale='he=e-1
 syn match taskrcGoodKey '^\s*\Vlocking='he=e-1
 syn match taskrcGoodKey '^\s*\Vnag='he=e-1
-syn match taskrcGoodKey '^\s*\Vnews.version='he=e-1
 syn match taskrcGoodKey '^\s*\Vobfuscate='he=e-1
 syn match taskrcGoodKey '^\s*\Vprint.empty.columns='he=e-1
 syn match taskrcGoodKey '^\s*\Vrecurrence='he=e-1

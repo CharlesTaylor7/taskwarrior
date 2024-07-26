@@ -178,7 +178,6 @@ int CmdShow::execute (std::string& output)
     " list.all.projects"
     " list.all.tags"
     " nag"
-    " news.version"
     " obfuscate"
     " print.empty.columns"
     " recurrence"
