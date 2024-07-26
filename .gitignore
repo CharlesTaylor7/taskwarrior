@@ -1,13 +1,22 @@
+# files
+Makefile
+CMakeCache.txt
+CMakeFiles/
+CPackConfig.cmake
 cmake.h
 commit.h
 .cache
-*~
-.*.swp
-Session.vim
-package-config/osx/binary/task
-/*build*/
-patches
-tutorials
-.prove
+compile_commands.json
+install_manifest.txt
+# file extensions
+*.cpp.o
+*.a
+*.cmake
+# directories
+/doc/man/
+/package-config/osx/binary/task
+/_deps/
+/build/
+/cargo/build/
 /target/
-/.idea/
+/corrosion/
