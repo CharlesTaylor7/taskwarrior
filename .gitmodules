@@ -1,3 +1,0 @@
-[submodule "src/tc/corrosion"]
-	path = src/tc/corrosion
-	url = https://github.com/corrosion-rs/corrosion.git
