@@ -25,15 +25,6 @@ if (ENABLE_WASM)
   set(CMAKE_EXECUTABLE_SUFFIX ".js")
 endif (ENABLE_WASM)
 
-message ("-- Looking for git submodules")
-if (EXISTS ${CMAKE_SOURCE_DIR}/src/libshared/src AND EXISTS ${CMAKE_SOURCE_DIR}/src/tc/corrosion)
-  message ("-- Found git submodules")
-else (EXISTS ${CMAKE_SOURCE_DIR}/src/libshared/src)
-  message ("-- Cloning git submodules")
-  execute_process (COMMAND git submodule update --init
-                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-endif (EXISTS ${CMAKE_SOURCE_DIR}/src/libshared/src AND EXISTS ${CMAKE_SOURCE_DIR}/src/tc/corrosion)
-
 message ("-- Looking for SHA1 references")
 if (EXISTS ${CMAKE_SOURCE_DIR}/.git/index)
   set (HAVE_COMMIT true)

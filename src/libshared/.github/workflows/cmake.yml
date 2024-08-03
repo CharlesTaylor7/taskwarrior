@@ -1,0 +1,57 @@
+name: CMake
+
+on: [push, pull_request]
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners
+        include:
+          - name: "Ubuntu 20.04"
+            runner: ubuntu-20.04
+          - name: "Ubuntu 22.04"
+            runner: ubuntu-22.04
+          - name: "macOS 14"
+            runner: macos-14
+          - name: "macOS 12"
+            runner: macos-12
+          - name: "macOS 13"
+            runner: macos-13
+    runs-on: ${{ matrix.runner }}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    # Configure in-source build and tests
+    - name: Configure CMake
+      run: cmake -S . -B . -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
+
+    - name: Build project
+      run: cmake --build .
+
+    - name: Test project
+      run: make test
+
+  integration-test:
+    needs: build
+    strategy:
+      matrix:
+        include:
+          - name: "Timewarrior [stable]"
+            container: "timew-libshared-stable"
+          - name: "Timewarrior [develop]"
+            container: "timew-libshared-develop"
+          - name: "Taskwarrior [stable]"
+            container: "task-libshared-stable"
+          - name: "Taskwarrior [develop]"
+            container: "task-libshared-develop"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: "Test on ${{ matrix.name }}"
+        run: docker-compose up ${{ matrix.container }}
