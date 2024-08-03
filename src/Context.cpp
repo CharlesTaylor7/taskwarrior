@@ -561,9 +561,6 @@ int Context::initialize(int argc, const char** argv) {
 
     CLI2::applyOverrides(argc, argv);
 
-    if (taskrc_overridden && verbose("override"))
-      header(format("TASKRC override: {1}", rc_file._data));
-
     ////////////////////////////////////////////////////////////////////////////
     //
     // [2] Locate the data directory.
