@@ -583,11 +583,6 @@ int Context::initialize(int argc, const char** argv) {
 
     taskdata_overridden = CLI2::getDataLocation(argc, argv, data_dir) || taskdata_overridden;
 
-    if (taskdata_overridden && verbose("override"))
-      header(format("TASKDATA override: {1}", data_dir._data));
-
-    createDefaultConfig();
-
     bool create_if_missing = !config.getBoolean("exit.on.missing.db");
     tdb2.open_replica(data_dir, create_if_missing);
 
