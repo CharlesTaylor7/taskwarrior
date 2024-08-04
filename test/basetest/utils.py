@@ -29,15 +29,15 @@ ON_POSIX = "posix" in sys.builtin_module_names
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Location of binary files (usually the src/ folder)
-BIN_PREFIX = os.path.abspath(os.path.join("${CMAKE_BINARY_DIR}", "src"))
+BIN_PREFIX = os.path.abspath(os.path.join("/Users/chuck/repos/taskwarrior", "src"))
 
 # Default location of test hooks
 DEFAULT_HOOK_PATH = os.path.abspath(
-    os.path.join("${CMAKE_SOURCE_DIR}", "test", "test_hooks")
+    os.path.join("/Users/chuck/repos/taskwarrior", "test", "test_hooks")
 )
 
 # Source directory
-SOURCE_DIR = os.path.abspath("${CMAKE_SOURCE_DIR}")
+SOURCE_DIR = os.path.abspath("/Users/chuck/repos/taskwarrior")
 
 
 # Environment flags to control skipping of task tests
