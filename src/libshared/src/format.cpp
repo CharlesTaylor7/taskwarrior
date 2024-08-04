@@ -49,15 +49,6 @@ std::string format (const char* value)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-std::string formatHex (int value)
-{
-  std::stringstream s;
-  s.setf (std::ios::hex, std::ios::basefield);
-  s << value;
-  return s.str ();
-}
-
-////////////////////////////////////////////////////////////////////////////////
 std::string format (float value, int width, int precision)
 {
   std::stringstream s;
@@ -130,14 +121,6 @@ std::string leftJustify (const int input, const int width)
 std::string leftJustify (const std::string& input, const int width)
 {
   return input + std::string (std::max<int> (width - utf8_text_width (input), 0), ' ');
-}
-
-////////////////////////////////////////////////////////////////////////////////
-std::string rightJustifyZero (const int input, const int width)
-{
-  std::stringstream s;
-  s << std::setw (width) << std::setfill ('0') << input;
-  return s.str ();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -227,43 +210,6 @@ std::string commify (const std::string& data)
     done += result[i];
 
   return done;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// Convert a quantity in bytes to a more readable format.
-std::string formatBytes (size_t bytes)
-{
-  char formatted[24];
-
-       if (bytes >=  995000000) snprintf (formatted, sizeof(formatted), "%.1f GiB", bytes / 1000000000.0);
-  else if (bytes >=     995000) snprintf (formatted, sizeof(formatted), "%.1f MiB", bytes /    1000000.0);
-  else if (bytes >=        995) snprintf (formatted, sizeof(formatted), "%.1f KiB", bytes /       1000.0);
-  else                          snprintf (formatted, sizeof(formatted), "%d B",     (int)bytes);
-
-  return commify (formatted);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// Convert a quantity in seconds to a more readable format.
-std::string formatTime (time_t seconds)
-{
-  char formatted[24];
-  float days = (float) seconds / 86400.0;
-
-       if (seconds >= 86400 * 365) snprintf (formatted, sizeof(formatted), "%.1f y", (days / 365.0));
-  else if (seconds >= 86400 * 84)  snprintf (formatted, sizeof(formatted), "%1d mo", (int) (days / 30));
-  else if (seconds >= 86400 * 13)  snprintf (formatted, sizeof(formatted), "%d wk",  (int) (float) (days / 7.0));
-  else if (seconds >= 86400)       snprintf (formatted, sizeof(formatted), "%d d",   (int) days);
-  else if (seconds >= 3600)        snprintf (formatted, sizeof(formatted), "%d h",   (int) (seconds / 3600));
-  else if (seconds >= 60)          snprintf (formatted, sizeof(formatted), "%d m",   (int) (seconds / 60));
-  else if (seconds >= 1)           snprintf (formatted, sizeof(formatted), "%d s",   (int) seconds);
-#ifdef HAVE_STRLCPY
-  else                             strlcpy (formatted, "-", sizeof(formatted));
-#else
-  else                             strcpy (formatted, "-");
-#endif /* HAVE_STRLCPY */
-
-  return std::string (formatted);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
