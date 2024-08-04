@@ -177,18 +177,6 @@ std::string ltrim (const std::string& input, const std::string& edible)
   return input.substr (start);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-std::string rtrim (const std::string& input, const std::string& edible)
-{
-  if (input.find_first_not_of (edible) == std::string::npos)
-    return "";
-
-  auto end = input.find_last_not_of (edible);
-  if (end == std::string::npos)
-    return input;
-
-  return input.substr (0, end + 1);
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 int longestWord (const std::string& input)
@@ -511,19 +499,6 @@ bool closeEnough (
   return false;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-int matchLength (
-  const std::string& left,
-  const std::string& right)
-{
-  int pos = 0;
-  while (left[pos] &&
-         right[pos] &&
-         left[pos] == right[pos])
-    ++pos;
-
-  return pos;
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 std::string::size_type find (
@@ -589,13 +564,6 @@ std::string lowerCase (const std::string& input)
   return output;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-std::string upperCase (const std::string& input)
-{
-  std::string output {input};
-  std::transform (output.begin (), output.end (), output.begin (), toupper);
-  return output;
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 std::string upperCaseFirst (const std::string& input)

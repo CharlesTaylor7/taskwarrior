@@ -162,26 +162,6 @@ int utf8_sequence (unsigned int character)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// Length of a string in characters.
-unsigned int utf8_length (const std::string& str)
-{
-  int byteLength = str.length ();
-  int charLength = byteLength;
-  const char* data = str.data ();
-
-  // Decrement the number of bytes for each byte that matches 0b10??????
-  // this way only the first byte of any utf8 sequence is counted.
-  for (int i = 0; i < byteLength; i++)
-  {
-    // Extract the first two bits and check whether they are 10
-    if ((data[i] & 0xC0) == 0x80)
-      charLength--;
-  }
-
-  return charLength;
-}
-
-////////////////////////////////////////////////////////////////////////////////
 // Width of a string in character cells.
 unsigned int utf8_width (const std::string& str)
 {
