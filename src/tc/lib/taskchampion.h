@@ -511,6 +511,26 @@ struct TCReplicaOpList {
 
 typedef struct TCReplicaOpList TCReplicaOpList;
 
+// ***** TCTaskList *****
+//
+// TCTaskList represents a list of tasks.
+//
+// The content of this struct must be treated as read-only: no fields or anything they reference
+// should be modified directly by C code.
+//
+// When an item is taken from this list, its pointer in `items` is set to NULL.
+typedef struct TCTaskList {
+  // number of tasks in items
+  size_t len;
+  // reserved
+  size_t _u1;
+  // Array of pointers representing each task. These remain owned by the TCTaskList instance and
+  // will be freed by tc_task_list_free.  This pointer is never NULL for a valid TCTaskList.
+  // Pointers in the array may be NULL after `tc_task_list_take`.
+  struct TCTask **items;
+} TCTaskList;
+
+
 // Create a new TCReplica with an in-memory database.  The contents of the database will be
 // lost when it is freed with tc_replica_free.
 EXTERN_C struct TCReplica *tc_replica_new_in_memory(void);
@@ -853,25 +873,6 @@ EXTERN_C struct TCString tc_task_error(struct TCTask *task);
 //
 // If the task is currently mutable, it will first be made immutable.
 EXTERN_C void tc_task_free(struct TCTask *task);
-
-// ***** TCTaskList *****
-//
-// TCTaskList represents a list of tasks.
-//
-// The content of this struct must be treated as read-only: no fields or anything they reference
-// should be modified directly by C code.
-//
-// When an item is taken from this list, its pointer in `items` is set to NULL.
-typedef struct TCTaskList {
-  // number of tasks in items
-  size_t len;
-  // reserved
-  size_t _u1;
-  // Array of pointers representing each task. These remain owned by the TCTaskList instance and
-  // will be freed by tc_task_list_free.  This pointer is never NULL for a valid TCTaskList.
-  // Pointers in the array may be NULL after `tc_task_list_take`.
-  struct TCTask **items;
-} TCTaskList;
 
 // Free a TCTaskList instance.  The instance, and all TCTaskList it contains, must not be used after
 // this call.
